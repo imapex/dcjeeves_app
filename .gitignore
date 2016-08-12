@@ -1,0 +1,29 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Flask stuff:
+instance/
+.webassets-cache
+
+# pyenv
+.python-version
+
+# Python Compiled Code
+*.pyo
+*.pyc
+
+# Backup files
+*~
+
+# Pycharm IDE files
+.idea/
+mydjangosite/.idea/
