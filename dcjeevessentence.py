@@ -1,4 +1,5 @@
 import re
+import json
 
 class dcjeevessentence():
     # define key value pairs since they are not always created (not mandatory)
@@ -59,18 +60,8 @@ class dcjeevessentence():
     def getkeys(self):
         return self.key_values
 
-    # pushes out the sentence into a dictionary
-    def dumptree(self):
-        dumpdict = {}
-        if len(self.key_values.keys()) > 0:
-            dumpdict{}
-            print self.key_values.keys()
-        print self.environment
-        return dumpdict
-
-
-
-# sentence = dcjeevessentence("dcjeeves show vm status on <ENVIRONMENT> at <CLOUD> where a equals b and c equals d")
+# Used for testing
+# sentence = dcjeevessentence("dcjeeves show vm status on <ENVIRONMENT> at <CLOUD> where MIKE equals AWESOME and c equals d")
 #
 # if sentence.parse():
 #     print "YES"
