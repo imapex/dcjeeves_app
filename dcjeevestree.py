@@ -12,8 +12,7 @@
 # Stored as nested dictionary
 #   {'dcjeeves': {'start vm': {'on': {'PROD': {}}}}}
 #
-
-
+__author__ = 'mytokarz'
 from dcjeevessentence import dcjeevessentence
 import json
 
@@ -53,11 +52,11 @@ class dcjeevestree():
         return 0
 
 
-# Used for testing
-tree = dcjeevestree()
-tree.add("dcjeeves start vm on PROD at <CLOUD> where vm name equals <VALUE1> and a equals b")
-tree.add("dcjeeves stop vm on QA at <CLOUD> where vm name equals <VALUE1>")
-tree.add("dcjeeves stop vm on DEV at <CLOUD>")
-
-print tree.getjson()
+# Used for debugging
+# tree = dcjeevestree()
+# tree.add("dcjeeves start vm on PROD at <CLOUD> where vm name equals <VALUE1> and a equals b")
+# tree.add("dcjeeves stop vm on QA at <CLOUD> where vm name equals <VALUE1>")
+# tree.add("dcjeeves stop vm on DEV at <CLOUD>")
+#
+# print tree.getjson()
 

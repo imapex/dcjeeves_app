@@ -12,29 +12,23 @@
 __author__ = 'mytokarz'
 
 from flask import Flask, Response
-import dcjeevessentence
+from dcjeevestree import dcjeevestree
 import re
 
 app_dir = "./"
 utterance_file = app_dir + "utterance.conf"
 
-utterance_lines = []
+
+tree = dcjeevestree()
 with open(utterance_file) as f:
     for line in f:
         if not re.match('^\s*#', line): # ignore comments
             if not re.match('^\s*$', line): # ignore empty lines
                 line = line.rstrip()
-                utterance_lines.append(line)
-                print line
+                tree.add(line)
 
-sentence = dcjeevessentence("dcjeeves show vm status on <ENVIRONMENT> at <CLOUD> where a equals b and c equals d and g equals h")
+print tree.getjson()
 
-if sentence.parse():
-    print sentence.__dict__
-    for k, v in sentence.getkeys().items():
-         print(k, v)
-else:
-    print "NO"
 
 
 

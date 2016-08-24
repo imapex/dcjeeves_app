@@ -1,9 +1,7 @@
+__author__ = 'mytokarz'
 import re
-import json
 
 class dcjeevessentence():
-    # define key value pairs since they are not always created (not mandatory)
-    #key_values = {}
 
     # Create a new sentence
     def __init__(self,sentence):
@@ -60,13 +58,13 @@ class dcjeevessentence():
     def getkeys(self):
         return self.key_values
 
-# Used for testing
+#Used for debugging
 # sentence = dcjeevessentence("dcjeeves show vm status on <ENVIRONMENT> at <CLOUD> where MIKE equals AWESOME and c equals d")
 #
 # if sentence.parse():
-#     print "YES"
+#     print "Good input"
 #     print sentence.__dict__
 #     for k, v in sentence.getkeys().items():
 #          print(k, v)
 # else:
-#     print "NO"
+#     print "Bad input"
