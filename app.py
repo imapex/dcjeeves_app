@@ -11,54 +11,51 @@
 '''
 __author__ = 'mytokarz'
 
-from flask import Flask, Response
+from flask import Flask, Response, send_from_directory
 from dcjeevestree import dcjeevestree
+import os
 import re
 
+# define static variables
 app_dir = "./"
 utterance_file = app_dir + "utterance.conf"
-
-
 tree = dcjeevestree()
-with open(utterance_file) as f:
-    for line in f:
-        if not re.match('^\s*#', line): # ignore comments
-            if not re.match('^\s*$', line): # ignore empty lines
-                line = line.rstrip()
-                tree.add(line)
-
-print tree.getjson()
 
 
+# Read in the utterance config file
+def readinconfigs():
+    global tree
+    with open(utterance_file) as f:
+        for line in f:
+            if not re.match('^\s*#', line): # ignore comments
+                if not re.match('^\s*$', line): # ignore empty lines
+                    line = line.rstrip()
+                    tree.add(line)
 
 
-
-
-
-exit()
+readinconfigs()
 
 app = Flask(__name__)
 
+@app.route('/json')
+def print_json():
+    '''
+    Return JSON version of utterance file.
+    '''
+    return  tree.getjson(), 200, {'content_type': 'application/json'}
+
+
 @app.route('/help')
-
-
-
 def print_help():
     '''
     Build a help response.
     '''
-
-
-    resp = Response(
-        content_type='application/json',
-        headers={"Usage": utterance_lines},
-        status=200)
-    return resp
+    return send_from_directory(os.path.join(app_dir,'static'),'app-help.txt'), 200, {'content_type': 'text'}
 
 
 @app.route('/')
 def hello_world():
-    return 'Hello, MIKE1'
+    return 'DCJeeves landing page, try /help'
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
