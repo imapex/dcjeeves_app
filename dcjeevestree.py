@@ -32,6 +32,8 @@ class dcjeevestree():
         temptree = temptree.setdefault(sentence.command,{})
         temptree = temptree.setdefault('on',{})
         temptree = temptree.setdefault(sentence.environment,{})
+        temptree = temptree.setdefault('at',{})
+        temptree = temptree.setdefault(sentence.cloud,{})
         count = 0
         for k, v in sentence.getkeys().items():
             if count == 0:
@@ -49,6 +51,7 @@ class dcjeevestree():
 
     # Search the tree structure for a sentence to see if its part of tree
     def includes(self,sentence):
+
         return 0
 
 

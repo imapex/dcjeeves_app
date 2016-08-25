@@ -14,6 +14,9 @@ pip-delete-this-directory.txt
 instance/
 .webassets-cache
 
+# Python Virenv
+virtenv/
+
 # pyenv
 .python-version
 
@@ -27,3 +30,6 @@ instance/
 # Pycharm IDE files
 .idea/
 mydjangosite/.idea/
+
+# DC Jeeves specific configs
+utterance.conf
