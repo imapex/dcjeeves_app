@@ -1,15 +1,44 @@
-DCJeeves Help Page
+<HTML>
+<style>
+h2 {display: inline;}
+#onerror{ display:none;}
+</style>
 
-This page can be reached by asking dcjeeves for help at /help
+<BODY>
+<H1><img src="static/dcjeeves.png" width="80"> dcjeeves help page</H1>
+<BR>
+<DIV id="onerror" >
+I don't understand this sentence:
 
-I also support the following calls
+</DIV>
+<script>
 
-/go
-ask dcjeveeves to do something
+var var1 = $_GET('sentence');
+$(#onerror').show();
 
-/json
-ask dcjeeves what he supports
+</script>
 
-/scrawl
-ask dcjeeves the scrawl shortcuts he supports
 
+<H2><A href="/help">/help</A></H2>
+this page can be reached by asking dcjeeves for help
+<BR>
+<H3>I also support the following</H3>
+
+<H2><A href="/go">/go</A></H2> ask dcjeveeves to do something
+ <form action="/go">
+  Try it <input type="text" name="sentence" style="width: 600px;"> <input type="submit" value="dcjevees go!">
+</form>
+
+<BR>
+<H2><A href="/validate">/validate</A></H2> have dcjeeves validate a request, same as /go except don't actually do it
+ <form action="/validate">
+  Try it <input type="text" name="sentence" style="width: 600px;"> <input type="submit" value="dcjevees validate!">
+</form>
+<BR>
+<H2><A href="/json">/json</A></H2> ask dcjeeves the utterances he knows
+<BR>
+<BR>
+<H2><A href="/scrawl">/scrawl</A></H2> ask dcjeeves the scrawl shortcuts he knows
+<BR>
+</BODY>
+</HTML>
