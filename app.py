@@ -48,8 +48,8 @@ def validate_sentence():
     '''
     Validate an utterance is supported.
     '''
-    if request.args.get("sentence") and tree.includes(request.args.get("sentence")):
-        return "looks good!", 200, {'content_type': 'text/html'}
+    if ('sentence' in request.args) and tree.includes(request.args.get("sentence")):
+        return "Looks good!", 200, {'content_type': 'text/html'}
     else:
         return "I don't understand this, try <A href='/help'>/help", 200, {'content_type': 'text/html'}
 
@@ -70,7 +70,7 @@ def print_help():
 
 
 @app.route('/')
-def hello_world():
+def main_landing():
     return redirect("/help", code=302)
 
 if __name__ == '__main__':
