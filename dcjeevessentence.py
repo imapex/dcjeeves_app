@@ -6,6 +6,7 @@ class dcjeevessentence():
     # Create a new sentence
     def __init__(self,sentence):
         self.key_values = {}
+        self.where = 0
         self.sentence = sentence
 
     # Dissect a sentence and verify it matches the syntax supported.
@@ -35,6 +36,7 @@ class dcjeevessentence():
 
         # Get key values pairs if 'where' clause is used
         if len(split_me)>1:
+            self.where = 1  # set the flag that there are keys
             values = split_me[1]
             while (values):
                 # split at the next 'and' if applicable
@@ -58,7 +60,10 @@ class dcjeevessentence():
     def getkeys(self):
         return self.key_values
 
-#Used for debugging
+    def containswhere(self):
+        return self.where
+
+#Used for stand alone debugging
 # sentence = dcjeevessentence("dcjeeves show vm status on <ENVIRONMENT> at <CLOUD> where MIKE equals AWESOME and c equals d")
 #
 # if sentence.parse():

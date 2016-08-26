@@ -15,7 +15,7 @@ instance/
 .webassets-cache
 
 # Python Virenv
-virtenv/
+virtenv/*
 
 # pyenv
 .python-version

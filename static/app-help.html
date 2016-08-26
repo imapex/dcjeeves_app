@@ -1,44 +1,55 @@
 <HTML>
 <style>
 h2 {display: inline;}
-#onerror{ display:none;}
+div.links {
+    background:#685634;
+    color:white;
+}
+a:link { color: #de9000; }
+a:visited { color: #de9000; }
+a:hover { color: #de9000; }
+a:active { color: #de9000; }
 </style>
 
 <BODY>
 <H1><img src="static/dcjeeves.png" width="80"> dcjeeves help page</H1>
 <BR>
-<DIV id="onerror" >
+<DIV id="onerror" hidden="hidden">
 I don't understand this sentence:
 
 </DIV>
 <script>
 
-var var1 = $_GET('sentence');
-$("#onerror").show();
-
+//var var1 = $_GET('sentence');
+var div = document.getElementById("onerror");
+//div.style.display = "block"
 </script>
 
-
-<H2><A href="/help">/help</A></H2>
-this page can be reached by asking dcjeeves for help
+<div class="links">
+<H2><A color="" href="/help">/help</A></H2>
+ ask dcjeeves for help, you are currently here</div>
 <BR>
 <H3>I also support the following</H3>
 
-<H2><A href="/go">/go</A></H2> ask dcjeveeves to do something
+<div class="links">
+<H2><A href="/go">/go</A></H2> ask dcjeveeves to do something</div>
  <form action="/go">
-  Try it <input type="text" name="sentence" style="width: 600px;"> <input type="submit" value="dcjevees go!">
+  <B>Try it </B><input type="text" name="sentence" style="width: 600px;"> <input type="submit" value="dcjevees go!">
 </form>
 
 <BR>
-<H2><A href="/validate">/validate</A></H2> have dcjeeves validate a request, same as /go except don't actually do it
+<div class="links">
+<H2><A href="/validate">/validate</A></H2> have dcjeeves validate a request, same as /go except don't actually do it</div>
  <form action="/validate">
-  Try it <input type="text" name="sentence" style="width: 600px;"> <input type="submit" value="dcjevees validate!">
+  <B>Try it</B> <input type="text" name="sentence" style="width: 600px;"> <input type="submit" value="dcjevees validate!">
 </form>
 <BR>
-<H2><A href="/json">/json</A></H2> ask dcjeeves the utterances he knows
+<div class="links">
+<H2><A href="/json">/json</A></H2> ask dcjeeves the utterances he knows</div>
 <BR>
 <BR>
-<H2><A href="/scrawl">/scrawl</A></H2> ask dcjeeves the scrawl shortcuts he knows
+<div class="links">
+<H2><A href="/scrawl">/scrawl</A></H2> ask dcjeeves the scrawl shortcuts he knows</div>
 <BR>
 </BODY>
 </HTML>
