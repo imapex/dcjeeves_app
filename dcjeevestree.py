@@ -15,8 +15,6 @@
 __author__ = 'mytokarz'
 from dcjeevessentence import dcjeevessentence
 import json
-import sys
-
 
 class dcjeevestree():
     mytree = {}
@@ -70,7 +68,7 @@ class dcjeevestree():
                 print "Key and values passed in: " + str(sentence.getkeys())
 
                 # Go through each key value pair and strip off while check the tree
-                for k, v in sentence.getkeys().items():
+                #for k, v in sentence.getkeys().items():
 
 
 
