@@ -1,0 +1,24 @@
+Rosemont:
+    Type: UCSD
+    IP: 10.0.0.10
+    USER: admin
+    PWD: secret
+    ENVIRONMENTS:
+        - Dev:
+            VDC: DCJeeves-DEV
+        - qa:
+            VDC: DCJeeves-QA
+        - pRod:
+            VDC: DCJeeves-PROD
+Chicago:
+    Type: UCSD
+    IP: 10.0.0.10
+    USER: admin
+    PWD: secret
+    ENVIRONMENTS:
+        - Dev:
+            VDC: DCJeeves-DEV
+        - qa:
+            VDC: DCJeeves-QA
+        - pRod:
+            VDC: DCJeeves-PROD
