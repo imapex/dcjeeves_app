@@ -15,7 +15,7 @@ instance/
 .webassets-cache
 
 # Python Virenv
-virtenv/*
+virtenv/
 
 # pyenv
 .python-version
@@ -33,3 +33,4 @@ mydjangosite/.idea/
 
 # DC Jeeves specific configs
 utterance.conf
+scrawl.conf
