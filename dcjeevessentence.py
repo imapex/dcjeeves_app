@@ -67,9 +67,9 @@ class dcjeevessentence():
 # sentence = dcjeevessentence("dcjeeves show vm status on <ENVIRONMENT> at <CLOUD> where MIKE equals AWESOME and c equals d")
 #
 # if sentence.parse():
-#     print "Good input"
-#     print sentence.__dict__
+#     print ("Good input")
+#     print (sentence.__dict__)
 #     for k, v in sentence.getkeys().items():
 #          print(k, v)
 # else:
-#     print "Bad input"
+#     print ("Bad input")

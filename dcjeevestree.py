@@ -52,20 +52,20 @@ class dcjeevestree():
 
     # Search the tree structure for a sentence to see if its known
     def includes(self,sent):
-        print "Validating sentence: " + sent
+        print ("Validating sentence: " + sent)
 
         # First verify the sentence
         sentence = dcjeevessentence(sent)
         sentence.parse()
         try:
             cmd_utter = self.mytree['dcjeeves'][sentence.command]['on']['<ENVIRONMENT>']['at']['<CLOUD>']
-            print "Everything before possible where clause matches"
+            print ("Everything before possible where clause matches")
 
             if sentence.containswhere():        # take action if where clause was used
-                print "where clause found"
+                print ("where clause found")
                 cmd_utter = cmd_utter['where']  # Strip off the where
-                print "Key and values expected: " + str(cmd_utter)
-                print "Key and values passed in: " + str(sentence.getkeys())
+                print ("Key and values expected: " + str(cmd_utter))
+                print ("Key and values passed in: " + str(sentence.getkeys()))
 
                 # Go through each key value pair and strip off while check the tree
                 #for k, v in sentence.getkeys().items():
@@ -73,8 +73,8 @@ class dcjeevestree():
 
 
         except:
-            print "The sentence passed in does not match any utterances"
-            print 'Passed in sentence: ' + sent
+            print ("The sentence passed in does not match any utterances")
+            print ('Passed in sentence: ' + sent)
             return 0
 
         # Second verify the scrawl substitutions
@@ -89,5 +89,5 @@ class dcjeevestree():
 # tree.add("dcjeeves stop vm on QA at <CLOUD> where vm name equals <VALUE1>")
 # tree.add("dcjeeves stop vm on DEV at <CLOUD>")
 #
-# print tree.getjson()
+# print (tree.getjson())
 
