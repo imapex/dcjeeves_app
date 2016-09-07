@@ -1,6 +1,7 @@
 #__author__ = 'mytokarz'
 
 import yaml
+import sys
 
 class scrawl():
 
@@ -21,13 +22,13 @@ class scrawl():
             print(exc)
 
         # Lowercase all the CLOUD keys, easier to search and validat later
-        self.datamap = dict((k.lower(), v) for k, v in self.datamap.iteritems())
+        self.datamap = dict((k.lower(), v) for k, v in self.datamap.items())
 
         # Lowercase all the ENVIRONMENT keys, easier to search adn validate later
         for k in self.datamap.keys():
             t = []
             for list in self.datamap[k]['ENVIRONMENTS']:
-                t.append(dict((k.lower(), v) for k, v in list.iteritems()))
+                t.append(dict((k.lower(), v) for k, v in list.items()))
             self.datamap[k]['ENVIRONMENTS'] = t
 
 
@@ -46,20 +47,60 @@ class scrawl():
     def listenvcloud(self):
         '''
         Get list of the ENVIRONMENT and CLOUD mappings
-        :return: JSON of all ENVIRONMENT and CLOUD mappings
+        :return: dict of all ENVIRONMENT and CLOUD mappings
         '''
+        mapping = {}
+        print ("List ENVIRONMENT and CLOUD mappings")
+        for k in (self.listcloud()):
+                # envs = ()
+                # for j in self.datamap[k]['ENVIRONMENTS']:
+                #     envs.append(list(j)[0])
+                #     print ("CLOUD : "+k+" | ENVIRONMENT : "+list(j)[0])
+            mapping[k] = self.listenvfromcloud(k)
+        return mapping
 
+    def listcloud(self):
+        '''
+        Get list of the CLOUD mappings
+        :return: dict of all CLOUD mappings
+        '''
+        print ("List CLOUDS")
+        clouds = {}
+        for k in self.datamap:
+            print ("CLOUD: "+k)
+            clouds[k] = None
+        return clouds
 
     def listenvfromcloud(self,cloud):
         '''
         Get list of ENVIRONMENT from passed in CLOUD
         :param cloud:
-        :return: JSON of all ENVIRONMENTs from passed in CLOUD.  None if CLOUD not found
+        :return: dict of all ENVIRONMENTs from passed in CLOUD.  None if CLOUD not found
         '''
-
+        env = []
+        try:
+            print ("List ENVIRONMENTS from CLOUD: \""+cloud+"\"")
+            for k in self.datamap[cloud.lower()]['ENVIRONMENTS']:
+                for j in k.keys():
+                    print ("ENVIRONMENT: "+j)
+                env.append(j)
+            return env
+        except:
+            print ("problem getting environments from cloud \""+cloud+"\"," +str(sys.exc_info()[0]))
+        return None
 
 
 # Used for stand alone debugging
-#myYaml = scrawl('scrawl.yaml')
+myYaml = scrawl('scrawl.yaml')
 #if myYaml.validateenvcloud("dEv","RoSemont"):
-#    print "Exists!"
+#    print ("Exists!")
+
+#myYaml.listenvcloud()
+#myYaml.listcloud()
+#myYaml.listenvfromcloud("Rosemont")
+#print (myYaml.validateenvcloud('qA','roseMont'))
+
+# if myYaml.validateenvcloud('dev','Rosemont'):
+#     print ("Valid environment and cloud passed in")
+# else:
+#     print ("Environment and Cloud not found")

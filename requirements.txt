@@ -1,1 +1,4 @@
 Flask==0.11.1
+pyyaml
+requests
+urllib3

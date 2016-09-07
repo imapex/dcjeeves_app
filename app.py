@@ -11,7 +11,7 @@
 '''
 __author__ = 'mytokarz'
 
-from flask import Flask, Response, send_from_directory, redirect,request
+from flask import Flask, send_from_directory, redirect,request
 from dcjeevestree import dcjeevestree
 from dcjeevessentence import dcjeevessentence
 from scrawl import scrawl
@@ -26,6 +26,7 @@ scrawl_file = app_dir + "scrawl.yaml"
 tree = dcjeevestree()
 response_json = {}
 get_help = "Try navigating to /help."
+scrawls = scrawl(scrawl_file)
 
 # Read in the utterance config file
 def readinconfigs():
@@ -37,28 +38,26 @@ def readinconfigs():
                 if not re.match('^\s*$', line): # ignore empty lines
                     line = line.rstrip()
                     tree.add(line)
-    # Read in the scrawl file
-    scrawls = scrawl(scrawl_file)
 
 def validate_request(sentence):
     response_json["Sentence"]=sentence
-    print "Validating sentence: "+sentence
+    print ("Validating sentence: "+sentence)
     dcjsentence = dcjeevessentence(sentence)
     if not dcjsentence.parse():
-        print "Sentence passed in failed ot parse"
+        print ("Sentence passed in failed ot parse")
         response_json["Details"] = "Sentence not found in utterance file. "+get_help
     else:
         if tree.includes(sentence):
-            print "Sentence found in utterance file"
+            print ("Sentence found in utterance file")
 
             if scrawlfile.validateenvcloud(dcjsentence.environment,dcjeevessentence.cloud):
-                print "ENVIRONMENT and CLOUD found in scrawl file"
+                print ("ENVIRONMENT and CLOUD found in scrawl file")
                 response_json["Details"] = sentence
                 response_json["Valid"] = "true"
             else:
                 response_json["Details"] = "(ENVIRONMENT|CLOUD) combination ("+ dcjsentence.environment+"|"+dcjeevessentence.cloud+") not found in scrawl file. "+get_help
         else:
-            print "Sentence not found in utterance file"
+            print ("Sentence not found in utterance file")
             response_json["Details"] = "Sentence not found in utterance file. "+get_help
     response_json["Valid"] = "false"
     return 0
@@ -101,9 +100,11 @@ def dcjeeves_go():
         return json.dumps({ "Valid": "false", "Details": "Sentence not passed in" },indent=4), 400, {'content_type': 'application/json'}
     return json.dumps(response_json,indent=4), 400, {'content_type': 'application/json'}
 
-@app.route('/scraw')
+@app.route('/scrawl')
 def dcjeeves_scrawlhelp():
-    return "Hi", 200, {'content_type': 'application/json'}
+    print(scrawls.listenvcloud())
+    print ("h3")
+    return json.dumps(scrawls.listenvcloud(),indent=4), 200, {'content_type': 'application/json'}
 
 @app.route('/help')
 def print_help():

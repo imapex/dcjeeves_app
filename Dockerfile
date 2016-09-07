@@ -1,16 +1,14 @@
-FROM alpine:latest
+FROM alpine:3.4
 
 # Update
-RUN apk add --update python py-pip
+RUN apk add --update python3 py-pip
 
-# Install app dependencies
-RUN pip install Flask
-
-#RuUN apt-get update -y
-#RUN apt-get install -y python-pip python-dev build-essential
 COPY . /app
 WORKDIR /app
+
+# Install app dependencies
 RUN pip install -r requirements.txt
+
 EXPOSE 5000
 ENTRYPOINT ["python"]
 CMD ["app.py"]
