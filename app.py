@@ -43,19 +43,21 @@ def validate_request(sentence):
     response_json["Sentence"]=sentence
     print ("Validating sentence: "+sentence)
     dcjsentence = dcjeevessentence(sentence)
-    if not dcjsentence.parse():
+
+    if not dcjsentence.parsed:
         print ("Sentence passed in failed ot parse")
         response_json["Details"] = "Sentence not found in utterance file. "+get_help
     else:
         if tree.includes(sentence):
             print ("Sentence found in utterance file")
-
-            if scrawlfile.validateenvcloud(dcjsentence.environment,dcjeevessentence.cloud):
+            print (dcjsentence.environment+"--"+dcjsentence.cloud)
+            if scrawls.validateenvcloud(dcjsentence.environment, dcjsentence.cloud):
                 print ("ENVIRONMENT and CLOUD found in scrawl file")
-                response_json["Details"] = sentence
+                response_json["Details"] = "OK"
                 response_json["Valid"] = "true"
+                return 1
             else:
-                response_json["Details"] = "(ENVIRONMENT|CLOUD) combination ("+ dcjsentence.environment+"|"+dcjeevessentence.cloud+") not found in scrawl file. "+get_help
+                response_json["Details"] = "(ENVIRONMENT|CLOUD) combination (" + dcjsentence.environment + "|" + dcjsentence.cloud+") not found in scrawl file. "+get_help
         else:
             print ("Sentence not found in utterance file")
             response_json["Details"] = "Sentence not found in utterance file. "+get_help
@@ -63,6 +65,7 @@ def validate_request(sentence):
     return 0
 
 readinconfigs()
+
 
 app = Flask(__name__)
 
@@ -103,7 +106,6 @@ def dcjeeves_go():
 @app.route('/scrawl')
 def dcjeeves_scrawlhelp():
     print(scrawls.listenvcloud())
-    print ("h3")
     return json.dumps(scrawls.listenvcloud(),indent=4), 200, {'content_type': 'application/json'}
 
 @app.route('/help')

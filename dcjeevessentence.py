@@ -8,6 +8,7 @@ class dcjeevessentence():
         self.key_values = {}
         self.where = 0
         self.sentence = sentence
+        self.parsed = self.parse()
 
     # Dissect a sentence and verify it matches the syntax supported.
     #
@@ -60,16 +61,19 @@ class dcjeevessentence():
     def getkeys(self):
         return self.key_values
 
+    def getsentenece(self):
+        return self.sentence
+
     def containswhere(self):
         return self.where
 
 #Used for stand alone debugging
-# sentence = dcjeevessentence("dcjeeves show vm status on <ENVIRONMENT> at <CLOUD> where MIKE equals AWESOME and c equals d")
-#
+#sentence = dcjeevessentence("dcjeeves show vm status on <ENVIRONMENT> at <CLOUD> where MIKE equals AWESOME and c equals d")
+
 # if sentence.parse():
-#     print ("Good input")
-#     print (sentence.__dict__)
+#     print("Good input")
+#     print(sentence.__dict__)
 #     for k, v in sentence.getkeys().items():
-#          print(k, v)
+#         print(k, v)
 # else:
-#     print ("Bad input")
+#     print("Bad input")
