@@ -90,6 +90,33 @@ class scrawl():
         return None
 
 
+    def gettype(self,cloud):
+        '''
+        Get the type of cloud
+        :param cloud:
+        :return: string of cloud type
+        '''
+        return self.datamap[cloud]['Type']
+
+
+    def getip(self,cloud):
+        '''
+        Get the IP address connection information from the cloud
+        :param cloud:
+        :return: IP
+        '''
+        return self.datamap[cloud]['IP']
+
+
+    def getrestapikey(self,cloud):
+        '''
+        Get the REST API Key for the cloud
+        :param cloud:
+        :return: REST API Key
+        '''
+        return self.datamap[cloud]['RESTAPIKEY']
+
+
 # Used for stand alone debugging
 myYaml = scrawl('scrawl.yaml')
 #if myYaml.validateenvcloud("dEv","RoSemont"):
