@@ -15,22 +15,28 @@ from flask import Flask, send_from_directory, redirect,request
 from dcjeevestree import dcjeevestree
 from dcjeevessentence import dcjeevessentence
 from scrawl import scrawl
+from dcjbroker import dcjbroker
 import os
 import re
 import json
 
 # define static variables
-app_dir = "./"
-utterance_file = app_dir + "utterance.conf"
-scrawl_file = app_dir + "scrawl.yaml"
-tree = dcjeevestree()
-response_json = {}
-get_help = "Try navigating to /help."
-scrawls = scrawl(scrawl_file)
+# ----------------------------------------------#-------------------------------------------#
+app_dir = "./"                                  # - application directory                   #
+utterance_file = app_dir + "utterance.conf"     # - location of utterance file              #
+scrawl_file = app_dir + "scrawl.yaml"           # - location of scrawl file                 #
+tree = dcjeevestree()                           # - build a data structure from utt file    #
+response_json = {}                              # - holds the json response                 #
+get_help = "Try navigating to /help."           # - string to append to all bad requests    #
+scrawls = scrawl(scrawl_file)                   # - build a data structure from scrawl file #
+# ----------------------------------------------#-------------------------------------------#
 
-# Read in the utterance config file
+
 def readinconfigs():
+    '''
     # Read in the utterance file
+    # To Do: This should be moved to a class long term like the scrawl file
+    '''
     global tree
     with open(utterance_file) as f:
         for line in f:
@@ -39,7 +45,13 @@ def readinconfigs():
                     line = line.rstrip()
                     tree.add(line)
 
+
 def validate_request(sentence):
+    '''
+    # Validate the sentenece passed in.  Syntax as well as scrawl mappings will be checked.
+
+    :rtype : object
+    '''
     response_json["Sentence"]=sentence
     print ("Validating sentence: "+sentence)
     dcjsentence = dcjeevessentence(sentence)
@@ -50,9 +62,8 @@ def validate_request(sentence):
     else:
         if tree.includes(sentence):
             print ("Sentence found in utterance file")
-            print (dcjsentence.environment+"--"+dcjsentence.cloud)
             if scrawls.validateenvcloud(dcjsentence.environment, dcjsentence.cloud):
-                print ("ENVIRONMENT and CLOUD found in scrawl file")
+                print ("ENVIRONMENT ("+dcjsentence.environment+") and CLOUD ("+dcjsentence.cloud+") found in scrawl file")
                 response_json["Details"] = "OK"
                 response_json["Valid"] = "true"
                 return 1
@@ -89,6 +100,7 @@ def validate_sentence():
         return json.dumps({ "Valid": "false", "Details": "Sentence not passed in" },indent=4), 400, {'content_type': 'application/json'}
     return json.dumps(response_json,indent=4), 400, {'content_type': 'application/json'}
 
+
 @app.route('/go')
 def dcjeeves_go():
     '''
@@ -98,15 +110,19 @@ def dcjeeves_go():
         valid = validate_request(request.args.get("sentence"))
         if valid:
             # Replace with back end execution
+            broker = dcjbroker(request.args.get("sentence"),scrawls)
+            response_json["Details"] = broker.execute()
             return json.dumps(response_json,indent=4), 200, {'content_type': 'application/json'}
     else:
         return json.dumps({ "Valid": "false", "Details": "Sentence not passed in" },indent=4), 400, {'content_type': 'application/json'}
     return json.dumps(response_json,indent=4), 400, {'content_type': 'application/json'}
 
+
 @app.route('/scrawl')
 def dcjeeves_scrawlhelp():
     print(scrawls.listenvcloud())
     return json.dumps(scrawls.listenvcloud(),indent=4), 200, {'content_type': 'application/json'}
+
 
 @app.route('/help')
 def print_help():
@@ -118,7 +134,12 @@ def print_help():
 
 @app.route('/')
 def main_landing():
+    '''
+    #If landing page hit, redirect to human readable help
+    #:return: redirect
+    '''
     return redirect("/help", code=302)
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
