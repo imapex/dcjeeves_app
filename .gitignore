@@ -33,4 +33,4 @@ mydjangosite/.idea/
 
 # DC Jeeves specific configs
 utterance.conf
-scrawl.conf
+scrawl.yaml

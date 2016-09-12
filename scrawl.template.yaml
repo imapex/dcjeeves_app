@@ -1,8 +1,7 @@
 Rosemont:
     Type: UCSD
     IP: 10.0.0.10
-    USER: admin
-    PWD: secret
+    RESTAPIKEY: XXXXXXXXXXXXXXXXXXXXXXXXX
     ENVIRONMENTS:
         - Dev:
             VDC: DCJeeves-DEV
@@ -13,8 +12,7 @@ Rosemont:
 Chicago:
     Type: UCSD
     IP: 10.0.0.10
-    USER: admin
-    PWD: secret
+    RESTAPIKEY: XXXXXXXXXXXXXXXXXXXXXXXXX
     ENVIRONMENTS:
         - Dev:
             VDC: DCJeeves-DEV
