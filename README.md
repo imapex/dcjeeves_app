@@ -28,6 +28,6 @@ Deployment of the application requires proper configuration of these files.
 **scrawl.yaml**
 This configuration file holds connection information for backend plugins.  More details are found in the file itself.  Copy and rename the provided template to the base directory / *scrawl.yaml*.
 
-** utterance.conf**
+**utterance.conf**
 This configuration file holds the commands (utterances) the app currently supports.  More details are found in the file itself.  Copy and rename the provided template to the base directory / *utterance.conf*.
 
