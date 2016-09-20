@@ -13,8 +13,10 @@
 #   {'dcjeeves': {'start vm': {'on': {'PROD': {'at': {'<CLOUD>': }}}}}}}
 #
 __author__ = 'mytokarz'
-from dcjeevessentence import dcjeevessentence
 import json
+
+from dcjeevessentence import dcjeevessentence
+
 
 class dcjeevestree():
     mytree = {}
@@ -58,7 +60,7 @@ class dcjeevestree():
         sentence = dcjeevessentence(sent)
         sentence.parse()
         try:
-            cmd_utter = self.mytree['dcjeeves'][sentence.command]['on']['<ENVIRONMENT>']['at']['<CLOUD>']
+            cmd_utter = self.mytree['dcjeeves'][sentence.command]['on']['<environment>']['at']['<cloud>']
             print ("Everything before possible where clause matches")
 
             if sentence.containswhere():        # take action if where clause was used
