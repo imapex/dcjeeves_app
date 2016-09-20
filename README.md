@@ -3,6 +3,7 @@ DCJeeves App is an adaptable datacenter middleware appliacation. Its goal is to 
 
 Lets take a look at the basic plugin-n-play architecture:
 
+![m'dcjeeves_app-overview](static/dcjeeves-app-overview.png)
 
 ## Backend Module
 The code involved in this module is a certain set of workflows capable of being called by DCJeeves.  DCJeeves makes calls to UCSD in an automated fashion based on the command being issued.  UCSD workflows are named in such a way that DC Jeeves doesn't have to know about them up front.
