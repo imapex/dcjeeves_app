@@ -22,6 +22,9 @@ class dcjeevessentence():
     def parse(self):
         passed_input = self.sentence.rstrip()
 
+        # Do everything in lowercase
+        passed_input = passed_input.lower()
+
         # split at the 'where' clause
         split_me = re.split('\s+where\s+',passed_input,1, re.IGNORECASE)
 
@@ -68,10 +71,11 @@ class dcjeevessentence():
         return self.where
 
 #Used for stand alone debugging
-#sentence = dcjeevessentence("dcjeeves show vm status on <ENVIRONMENT> at <CLOUD> where MIKE equals AWESOME and c equals d")
-
+# sentence = dcjeevessentence("dcjeeves show vm status on <ENVIRONMENT> at <CLOUD> where MIKE equals AWESOME and c equals d")
+#
 # if sentence.parse():
 #     print("Good input")
+#     print("Sentence passed in was: \'"+sentence.getsentenece()+'\'')
 #     print(sentence.__dict__)
 #     for k, v in sentence.getkeys().items():
 #         print(k, v)
